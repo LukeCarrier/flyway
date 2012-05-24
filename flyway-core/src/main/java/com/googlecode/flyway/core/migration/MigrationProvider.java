@@ -21,6 +21,7 @@ import com.googlecode.flyway.core.exception.FlywayException;
 import com.googlecode.flyway.core.migration.java.JavaMigrationResolver;
 import com.googlecode.flyway.core.migration.sql.PlaceholderReplacer;
 import com.googlecode.flyway.core.migration.sql.SqlMigrationResolver;
+import com.googlecode.flyway.core.migration.sqlfs.SqlfsMigrationResolver;
 import com.googlecode.flyway.core.validation.ValidationException;
 
 /**
@@ -125,8 +126,13 @@ public class MigrationProvider {
         PlaceholderReplacer placeholderReplacer = new PlaceholderReplacer(placeholders, placeholderPrefix, placeholderSuffix);
 
         Collection<MigrationResolver> migrationResolvers = new ArrayList<MigrationResolver>();
-        migrationResolvers.add(new SqlMigrationResolver(baseDir, placeholderReplacer, encoding, sqlMigrationPrefix, sqlMigrationSuffix));
         migrationResolvers.add(new JavaMigrationResolver(basePackage));
+
+        if (baseDir.startsWith("file:")) {
+            migrationResolvers.add(new SqlfsMigrationResolver(baseDir, placeholderReplacer, encoding, sqlMigrationPrefix, sqlMigrationSuffix));
+        } else {
+        	migrationResolvers.add(new SqlMigrationResolver(baseDir, placeholderReplacer, encoding, sqlMigrationPrefix, sqlMigrationSuffix));
+        }
 
         List<Migration> migrations = new ArrayList<Migration>(collectMigrations(migrationResolvers));
         Collections.sort(migrations);
