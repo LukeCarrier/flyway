@@ -84,7 +84,7 @@ public class SqlfsMigrationResolver implements MigrationResolver {
         Collection<Migration> migrations = new ArrayList<Migration>();
 
         String normalizedBaseDir = baseDir.substring(5);
-    	File dir = new File(normalizedBaseDir);
+        File dir = new File(normalizedBaseDir);
 
         if (StringUtils.hasText(normalizedBaseDir) && !dir.isDirectory()) {
             LOG.warn("Unable to find filesystem path for sql migrations: " + baseDir);
@@ -95,11 +95,11 @@ public class SqlfsMigrationResolver implements MigrationResolver {
         String searchRoot = normalizedBaseDir + "/";
 
         for (String resource : resources) {
-        	final String versionString = extractVersionStringFromFileName(resource, sqlMigrationPrefix, sqlMigrationSuffix);
-        	String location = searchRoot + resource;
+            final String versionString = extractVersionStringFromFileName(resource, sqlMigrationPrefix, sqlMigrationSuffix);
+            String location = searchRoot + resource;
 
-        	File file = new File(location);
-        	migrations.add(new SqlfsMigration(file, placeholderReplacer, encoding, versionString, resource));
+            File file = new File(location);
+            migrations.add(new SqlfsMigration(file, placeholderReplacer, encoding, versionString, resource));
         }
 
         return migrations;

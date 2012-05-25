@@ -20,27 +20,27 @@ import java.io.FilenameFilter;
 
 public class SqlfsScriptFilter implements FilenameFilter {
 
-	/**
-	 * Filename prefix for SQL migrations
-	 */
-	protected String sqlMigrationPrefix;
+    /**
+     * Filename prefix for SQL migrations
+     */
+    protected String sqlMigrationPrefix;
 
-	/**
-	 * Filename suffix for SQL migrations 
-	 */
-	protected String sqlMigrationSuffix;
+    /**
+     * Filename suffix for SQL migrations
+     */
+    protected String sqlMigrationSuffix;
 
-	public SqlfsScriptFilter(String sqlMigrationPrefix, String sqlMigrationSuffix) {
-		this.sqlMigrationPrefix = sqlMigrationPrefix;
-		this.sqlMigrationSuffix = sqlMigrationSuffix;
-	}
+    public SqlfsScriptFilter(String sqlMigrationPrefix, String sqlMigrationSuffix) {
+        this.sqlMigrationPrefix = sqlMigrationPrefix;
+        this.sqlMigrationSuffix = sqlMigrationSuffix;
+    }
 
-	public boolean accept(File dir, String name) {
-		if (name.startsWith(this.sqlMigrationPrefix) && name.endsWith(this.sqlMigrationSuffix)) {
-			return true;
-		}
+    public boolean accept(File dir, String name) {
+        if (name.startsWith(this.sqlMigrationPrefix) && name.endsWith(this.sqlMigrationSuffix)) {
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 }

@@ -87,26 +87,26 @@ public class SqlfsMigration extends Migration {
     public String getLocation() {
         return sqlScriptResource.getAbsolutePath();
     }
-    
+
     public String getString() {
-    	if (sqlScriptSource == null) {
-	        try {
-	        	FileInputStream file = new FileInputStream(sqlScriptResource);
-	        	InputStreamReader streamReader = new InputStreamReader(file, encoding);
-	        	Reader reader = new BufferedReader(streamReader);
-	        	StringBuffer sqlScriptSourceBuffer = new StringBuffer();
-	
-	        	int ch;
-	        	while ((ch = reader.read()) > -1) {
-	        		sqlScriptSourceBuffer.append((char) ch);
-	        	}
-	
-	        	reader.close();
-	        	sqlScriptSource = sqlScriptSourceBuffer.toString();
-	        } catch (IOException e) {
-	        	throw new FlywayException("Unable to load resource: " + getLocation() + " (encoding: " + encoding + ")", e);
-	        }
-    	}
+        if (sqlScriptSource == null) {
+            try {
+                FileInputStream file = new FileInputStream(sqlScriptResource);
+                InputStreamReader streamReader = new InputStreamReader(file, encoding);
+                Reader reader = new BufferedReader(streamReader);
+                StringBuffer sqlScriptSourceBuffer = new StringBuffer();
+
+                int ch;
+                while ((ch = reader.read()) > -1) {
+                    sqlScriptSourceBuffer.append((char) ch);
+                }
+
+                reader.close();
+                sqlScriptSource = sqlScriptSourceBuffer.toString();
+            } catch (IOException e) {
+                throw new FlywayException("Unable to load resource: " + getLocation() + " (encoding: " + encoding + ")", e);
+            }
+        }
 
         return sqlScriptSource;
     }

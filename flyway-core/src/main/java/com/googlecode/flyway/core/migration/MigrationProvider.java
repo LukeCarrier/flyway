@@ -131,7 +131,7 @@ public class MigrationProvider {
         if (baseDir.startsWith("file:")) {
             migrationResolvers.add(new SqlfsMigrationResolver(baseDir, placeholderReplacer, encoding, sqlMigrationPrefix, sqlMigrationSuffix));
         } else {
-        	migrationResolvers.add(new SqlMigrationResolver(baseDir, placeholderReplacer, encoding, sqlMigrationPrefix, sqlMigrationSuffix));
+            migrationResolvers.add(new SqlMigrationResolver(baseDir, placeholderReplacer, encoding, sqlMigrationPrefix, sqlMigrationSuffix));
         }
 
         List<Migration> migrations = new ArrayList<Migration>(collectMigrations(migrationResolvers));
